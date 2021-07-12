@@ -1,0 +1,7 @@
+{
+  "name": "w-rter",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
