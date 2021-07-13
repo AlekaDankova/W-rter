@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
 })
 export class HomePage {
 
-  // public matches = [];
   public name;
   public games = [];
 
@@ -22,14 +21,16 @@ export class HomePage {
         if (!hasPermission) {
           this.speechRecognition.requestPermission()
             .then(
-              () => console.log('Granted'),
-              () => console.log('Denied')
+              () => console.log('Berechtigungen wurden erteilt'),
+              () => console.log('Keine Berechtigungen')
             )
         }
       });
-      // console.log(window.localStorage);
-      this.update();
   }
+
+  ionViewWillEnter(){
+    this.update();
+   }
 
   update(){
     this.games = [];
@@ -41,7 +42,7 @@ export class HomePage {
 
   start() {
     if (this.name == undefined) {
-      alert("invalid game name");
+      alert("Gib den Namen des Spiels ein!");
     } else {
       localStorage.setItem('gameName', this.name);
       localStorage.setItem(this.name, JSON.stringify([]));
@@ -58,38 +59,5 @@ export class HomePage {
     window.localStorage.removeItem(item);
     this.update();
   }
-
-  // checkPermission() {
-  //   this.speechRecognition.hasPermission().then((permission) => {
-  //     if (permission) {
-  //       alert("Already has permission for speech recognition")
-  //     }
-  //     else {
-  //       alert("Not permission yet")
-  //     }
-  //   }, (err) => {
-  //     alert(JSON.stringify(err))
-  //   })
-  // }
-
-  // requestPermission() {
-  //   this.speechRecognition.requestPermission().then((data) => {
-  //     alert(JSON.stringify(data))
-  //   }, (err) => {
-  //     alert(JSON.stringify(err))
-  //   })
-  // }
-
-  // startListening() {
-  //   this.speechRecognition.startListening().subscribe((speeches) => {
-  //     this.matches = speeches
-  //   }, (err) => {
-  //     alert(JSON.stringify(err))
-  //   })
-  // }
-
-  // stopListening() {
-  //   this.speechRecognition.stopListening();
-  // }
 
 }

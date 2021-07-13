@@ -1,35 +1,19 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Слова
+      W••rter
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <!-- <ion-button color="primary" size="full" (click)= "checkPermission()"> Get Permission</ion-button>
-  <ion-button color="primary" size="full" (click)= "startListening()"> Start Listening</ion-button>
-  <ion-button color="primary" size="full" (click)= "stopListening()"> Stop Listening</ion-button>
-
-  <ion-button color="primary" size="full" [routerLink]="['/game']"> Game</ion-button>
-
-  <ion-card>
-    <ion-card-title>What I heard....</ion-card-title>
-    <ion-card-content>
-      <ion-list>
-        <ion-item *ngFor="let match of matches">
-          {{match}}
-        </ion-item>
-      </ion-list>
-    </ion-card-content>
-  </ion-card> -->
-  <ion-input placeholder="Имя новой игры" [(ngModel)]="name">
+  <ion-input placeholder="Der Name des neuen Spiels..." [(ngModel)]="name">
     <ion-button (click)="start()"><ion-icon slot="icon-only" name="checkmark-circle-outline"></ion-icon></ion-button>
   </ion-input>
   
   <ion-list>
     <ion-list-header>
-      <ion-label>Сохраненные игры:</ion-label>
+      <ion-label>Gespeicherte Spiele:</ion-label>
     </ion-list-header>
     <ion-item *ngFor="let item of games">
       <ion-label>{{item}}</ion-label>

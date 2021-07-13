@@ -11,7 +11,6 @@ export class GamePage implements OnInit {
 
   public gameName = window.localStorage.getItem('gameName');
   public woerter = JSON.parse(window.localStorage.getItem(this.gameName));
-  public lastWord = this.woerter[this.woerter.length - 1];
 
   constructor(
     public speechRecognition: SpeechRecognition,
@@ -21,8 +20,8 @@ export class GamePage implements OnInit {
   ngOnInit() { }
 
   addWord(){
-    if(this.woerter.length == 0) this.alertPromt("Выберите любое слово", "");
-    else this.alertPromt("Следующее слово на букву: ", this.woerter[this.woerter.length - 1][this.woerter[this.woerter.length - 1].length - 1]);
+    if(this.woerter.length == 0) this.nextWord("Wählen Sie ein beliebiges Wort...", "");
+    else this.nextWord("Das nächste Wort mit dem Buchstaben: ", this.woerter[this.woerter.length - 1][this.woerter[this.woerter.length - 1].length - 1]);
   }
 
   speechWord() {
@@ -45,8 +44,6 @@ export class GamePage implements OnInit {
         label: words[i],
         value: words[i],
         handler: () => {
-          console.log(words[i] + ' selected');
-          // alert(words[i]);
           word = words[i];
           bukva = words[i].toString()[words[i].toString().length - 1];
         },
@@ -55,26 +52,22 @@ export class GamePage implements OnInit {
       inputs.push(item);
     }
     const alert = await this.alertController.create({
-      header: 'Следующие слова были распознаны',
+      header: 'Folgende Wörter wurden erkannt:',
       inputs: inputs,
       buttons: [
         {
           text: 'Cancel',
           role: 'cancel',
-          cssClass: 'secondary',
-          handler: () => {
-            console.log('Confirm Cancel');
-          }
+          handler: () => { }
         }, {
           text: 'Ok',
           handler: () => {
             let t = this.woerter.includes(word);
             if (!t) {
-              this.lastWord = word;
               this.woerter.push(word);
               localStorage.setItem(this.gameName, JSON.stringify(this.woerter));
-              this.alertPromt("Следующее слово на букву: ", bukva);
-            } else this.alertPromt("Такое слово уже есть. Новое слово на букву: ", this.woerter[this.woerter.length - 1][this.woerter[this.woerter.length - 1].length - 1]);
+              this.nextWord("Das nächste Wort mit dem Buchstaben: ", bukva);
+            } else this.nextWord("Ein solches Wort existiert bereits. Ein neues Wort mit dem Buchstaben: ", this.woerter[this.woerter.length - 1][this.woerter[this.woerter.length - 1].length - 1]);
           }
         }
       ]
@@ -82,17 +75,14 @@ export class GamePage implements OnInit {
     await alert.present();
   }
 
-  async alertPromt(text, bukva) {
+  async nextWord(text, bukva) {
     const alert = await this.alertController.create({
       header: text + bukva,
       buttons: [
         {
           text: 'Cancel',
           role: 'cancel',
-          cssClass: 'secondary',
-          handler: () => {
-            console.log('Confirm Cancel');
-          }
+          handler: () => { }
         }, {
           text: 'Ok',
           handler: () => {
