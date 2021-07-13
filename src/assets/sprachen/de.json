@@ -1,0 +1,20 @@
+{
+    "GAME_NAME": "W••rter",
+    "HOME": {
+        "INPUT": "Der Name des neuen Spiels...",
+        "LIST": "Gespeicherte Spiele:",
+        "ALERT": {
+            "SPEECHPERMISSION_OK": "Berechtigungen wurden erteilt",
+            "SPEECHPERMISSION_ERR": "Keine Berechtigungen",
+            "NAME_ERR": "Gib den Namen des Spiels ein!"
+        }
+    },
+    "GAME": {
+        "ALERT": {
+            "START": "Wählen Sie ein beliebiges Wort...",
+            "NEXT": "Das nächste Wort mit dem Buchstaben: ",
+            "LIST": "Folgende Wörter wurden erkannt:",
+            "ERROR": "Ein solches Wort existiert bereits. Ein neues Wort mit dem Buchstaben: "
+        }
+    }
+}

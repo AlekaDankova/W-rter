@@ -1,19 +1,23 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      W••rter
+      {{sprachen.spracheArray.GAME_NAME}}
     </ion-title>
+    <ion-select slot="end" [(ngModel)]="sprachen.sprache" (ionChange)="sprachen.getSprache()">
+      <ion-select-option value="ru">Русский</ion-select-option>
+      <ion-select-option value="de">Deutsch</ion-select-option>
+    </ion-select>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-input placeholder="Der Name des neuen Spiels..." [(ngModel)]="name">
+  <ion-input [placeholder]="sprachen.spracheArray.HOME.INPUT" [(ngModel)]="name">
     <ion-button (click)="start()"><ion-icon slot="icon-only" name="checkmark-circle-outline"></ion-icon></ion-button>
   </ion-input>
   
   <ion-list>
     <ion-list-header>
-      <ion-label>Gespeicherte Spiele:</ion-label>
+      <ion-label>{{sprachen.spracheArray.HOME.LIST}}</ion-label>
     </ion-list-header>
     <ion-item *ngFor="let item of games">
       <ion-label>{{item}}</ion-label>

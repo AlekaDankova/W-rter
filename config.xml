@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Слова</name>
-    <description>Игра в слова на последнюю букву</description>
+    <name>W••rds</name>
+    <description>Word game on the last letter</description>
     <author email="hexe.aleka@gmail.com">Aleka Dankova</author>
     <content src="index.html" />
     <access origin="*" />

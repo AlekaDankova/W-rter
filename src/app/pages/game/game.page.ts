@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SpeechRecognition } from '@ionic-native/speech-recognition/ngx';
 import { AlertController } from '@ionic/angular';
+import { SprachenService } from 'src/app/services/sprachen.service';
 
 @Component({
   selector: 'app-game',
@@ -11,17 +12,19 @@ export class GamePage implements OnInit {
 
   public gameName = window.localStorage.getItem('gameName');
   public woerter = JSON.parse(window.localStorage.getItem(this.gameName));
+  private sprachenAlert = JSON.parse(JSON.stringify(this.sprachen.spracheArray));
 
   constructor(
     public speechRecognition: SpeechRecognition,
-    public alertController: AlertController
+    public alertController: AlertController,
+    public sprachen: SprachenService
   ) { }
 
   ngOnInit() { }
 
   addWord(){
-    if(this.woerter.length == 0) this.nextWord("Wählen Sie ein beliebiges Wort...", "");
-    else this.nextWord("Das nächste Wort mit dem Buchstaben: ", this.woerter[this.woerter.length - 1][this.woerter[this.woerter.length - 1].length - 1]);
+    if(this.woerter.length == 0) this.nextWord(this.sprachenAlert.GAME.ALERT.START, "");
+    else this.nextWord(this.sprachenAlert.GAME.ALERT.NEXT, this.woerter[this.woerter.length - 1][this.woerter[this.woerter.length - 1].length - 1]);
   }
 
   speechWord() {
@@ -52,7 +55,7 @@ export class GamePage implements OnInit {
       inputs.push(item);
     }
     const alert = await this.alertController.create({
-      header: 'Folgende Wörter wurden erkannt:',
+      header: this.sprachenAlert.GAME.ALERT.LIST,
       inputs: inputs,
       buttons: [
         {
@@ -66,8 +69,8 @@ export class GamePage implements OnInit {
             if (!t) {
               this.woerter.push(word);
               localStorage.setItem(this.gameName, JSON.stringify(this.woerter));
-              this.nextWord("Das nächste Wort mit dem Buchstaben: ", bukva);
-            } else this.nextWord("Ein solches Wort existiert bereits. Ein neues Wort mit dem Buchstaben: ", this.woerter[this.woerter.length - 1][this.woerter[this.woerter.length - 1].length - 1]);
+              this.nextWord(this.sprachenAlert.GAME.ALERT.NEXT, bukva);
+            } else this.nextWord(this.sprachenAlert.GAME.ALERT.ERROR, this.woerter[this.woerter.length - 1][this.woerter[this.woerter.length - 1].length - 1]);
           }
         }
       ]
