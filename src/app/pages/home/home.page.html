@@ -22,8 +22,8 @@
     </ion-list-header>
     <ion-item *ngFor="let item of games" (click)="getCountWord(item)">
       <ion-label>{{item}}</ion-label>
-      <ion-button (click)="startG(item)"><ion-icon slot="icon-only" name="checkmark-circle-outline"></ion-icon></ion-button> 
-      <ion-button (click)="deleteG(item)"><ion-icon slot="icon-only" name="trash"></ion-icon></ion-button>
+      <ion-button (click)="startG(item);$event.stopPropagation();"><ion-icon slot="icon-only" name="checkmark-circle-outline"></ion-icon></ion-button> 
+      <ion-button (click)="deleteG(item);$event.stopPropagation();"><ion-icon slot="icon-only" name="trash"></ion-icon></ion-button>
     </ion-item>
   </ion-list>
 </ion-content>
