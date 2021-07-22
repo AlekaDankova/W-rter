@@ -28,7 +28,7 @@ export class HomePage {
             .then(
               async () => {
                 const alert = await this.alertController.create({
-                  header: this.languagesAlert.HOME.ALERT.SPEECHPERMISSION_OK,
+                  header: this.languagesAlert.HOME.ALERT.SPEECHPERMISSION_Ok,
                   buttons: [
                     {
                       text: 'Ok',
@@ -43,7 +43,7 @@ export class HomePage {
                   header: this.languagesAlert.HOME.ALERT.SPEECHPERMISSION_ERR,
                   buttons: [
                     {
-                      text: 'Cancel',
+                      text: this.languagesAlert.HOME.ALERT.CANCEL,
                       role: 'cancel'
                     }
                   ]
@@ -73,7 +73,7 @@ export class HomePage {
         header: this.languagesAlert.HOME.ALERT.NAME_ERR,
         buttons: [
           {
-            text: 'Cancel',
+            text: this.languagesAlert.HOME.ALERT.CANCEL,
             role: 'cancel'
           }
         ]
@@ -97,7 +97,7 @@ export class HomePage {
       header: this.languagesAlert.HOME.ALERT.DELETE_GAME,
       buttons: [
         {
-          text: 'Cancel',
+          text: this.languagesAlert.HOME.ALERT.CANCEL,
           role: 'cancel'
         }, {
           text: 'Ok',

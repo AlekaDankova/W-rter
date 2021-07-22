@@ -8,7 +8,8 @@
             "SPEECHPERMISSION_ERR": "No permissions",
             "NAME_ERR": "Enter the name of the game!",
             "DELETE_GAME": "Are you sure you want to delete this game?",
-            "WORD_COUNT": "Number of words in the game: "
+            "WORD_COUNT": "Number of words in the game: ",
+            "CANCEL": "Back"
         }
     },
     "GAME": {
@@ -17,7 +18,9 @@
             "NEXT": "The next word with a letter: ",
             "LIST": "The following words were recognized:",
             "ERROR": "Such a word already exists. A new word with a letter: ",
-            "ERROR_BUKVA": "The word starts with the wrong letter. The next word with a letter: "
+            "ERROR_BUKVA": "The word starts with the wrong letter. The next word with a letter: ",
+            "CANCEL": "Back",
+            "AGAIN": "Again"
         }
     }
 }

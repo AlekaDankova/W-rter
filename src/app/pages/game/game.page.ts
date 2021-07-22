@@ -45,7 +45,7 @@ export class GamePage implements OnInit {
         header: JSON.stringify(err),
         buttons: [
           {
-            text: 'Cancel',
+            text: this.languagesAlert.GAME.ALERT.CANCEL,
             role: 'cancel'
           }
         ]
@@ -75,9 +75,14 @@ export class GamePage implements OnInit {
       inputs: inputs,
       buttons: [
         {
-          text: 'Cancel',
+          text: this.languagesAlert.GAME.ALERT.CANCEL,
           role: 'cancel',
           handler: () => { }
+        }, {
+          text: this.languagesAlert.GAME.ALERT.AGAIN,
+          handler: () => {
+            this.speechWord();
+          }
         }, {
           text: 'Ok',
           handler: () => {
@@ -119,7 +124,7 @@ export class GamePage implements OnInit {
       header: text + letter,
       buttons: [
         {
-          text: 'Cancel',
+          text: this.languagesAlert.GAME.ALERT.CANCEL,
           role: 'cancel'
         }, {
           text: 'Ok',

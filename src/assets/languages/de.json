@@ -8,7 +8,8 @@
             "SPEECHPERMISSION_ERR": "Keine Berechtigungen",
             "NAME_ERR": "Gib den Namen des Spiels ein!",
             "DELETE_GAME": "Möchten Sie dieses Spiel wirklich löschen?",
-            "WORD_COUNT": "Anzahl der Wörter im Spiel: "
+            "WORD_COUNT": "Anzahl der Wörter im Spiel: ",
+            "CANCEL": "Zurück"
         }
     },
     "GAME": {
@@ -17,7 +18,9 @@
             "NEXT": "Das nächste Wort mit dem Buchstaben: ",
             "LIST": "Folgende Wörter wurden erkannt:",
             "ERROR": "Ein solches Wort existiert bereits. Ein neues Wort mit dem Buchstaben: ",
-            "ERROR_BUKVA": "Das Wort beginnt mit dem falschen Buchstaben. Das nächste Wort mit dem Buchstaben: "
+            "ERROR_BUKVA": "Das Wort beginnt mit dem falschen Buchstaben. Das nächste Wort mit dem Buchstaben: ",
+            "CANCEL": "Zurück",
+            "AGAIN": "Noch einmal"
         }
     }
 }
