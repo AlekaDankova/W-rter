@@ -33,19 +33,19 @@ export class HomePage {
       });
   }
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     this.update();
-   }
+  }
 
-  update(){
+  update() {
     this.games = [];
-    for(let i = 0; i < window.localStorage.length; i++){
-      if(window.localStorage.key(i) != "gameName" && window.localStorage.key(i) != "language")
+    for (let i = 0; i < window.localStorage.length; i++) {
+      if (window.localStorage.key(i) != "gameName" && window.localStorage.key(i) != "language")
         this.games.push(window.localStorage.key(i));
     }
   }
 
-  start() {
+  startNewG() {
     if (this.name == undefined) {
       alert(this.languagesAlert.HOME.ALERT.NAME_ERR);
     } else {
@@ -56,12 +56,12 @@ export class HomePage {
     }
   }
 
-  startG(item){
+  startG(item) {
     localStorage.setItem('gameName', item);
     this.router.navigate(['/game']);
   }
 
-  async deleteG(item){
+  async deleteG(item) {
     const alert = await this.alertController.create({
       header: this.languagesAlert.HOME.ALERT.DELETE_GAME,
       buttons: [
@@ -79,6 +79,11 @@ export class HomePage {
       ]
     });
     await alert.present();
+  }
+
+  getCountWord(gameName) {
+    let words = JSON.parse(window.localStorage.getItem(gameName));
+    alert(this.languagesAlert.HOME.ALERT.WORD_COUNT + words.length);
   }
 
 }

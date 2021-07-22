@@ -13,14 +13,14 @@
 
 <ion-content [fullscreen]="true">
   <ion-input [placeholder]="languages.languagesArray.HOME.INPUT" [(ngModel)]="name">
-    <ion-button (click)="start()"><ion-icon slot="icon-only" name="checkmark-circle-outline"></ion-icon></ion-button>
+    <ion-button (click)="startNewG()"><ion-icon slot="icon-only" name="checkmark-circle-outline"></ion-icon></ion-button>
   </ion-input>
   
   <ion-list *ngIf="games.length != 0">
     <ion-list-header>
       <ion-label>{{languages.languagesArray.HOME.LIST}}</ion-label>
     </ion-list-header>
-    <ion-item *ngFor="let item of games">
+    <ion-item *ngFor="let item of games" (click)="getCountWord(item)">
       <ion-label>{{item}}</ion-label>
       <ion-button (click)="startG(item)"><ion-icon slot="icon-only" name="checkmark-circle-outline"></ion-icon></ion-button> 
       <ion-button (click)="deleteG(item)"><ion-icon slot="icon-only" name="trash"></ion-icon></ion-button>

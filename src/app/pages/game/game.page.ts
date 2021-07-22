@@ -27,6 +27,11 @@ export class GamePage implements OnInit {
     if(this.words.length == 0) this.nextWord(this.languagesAlert.GAME.ALERT.START, "");
     else {
       this.last_letter = this.words[this.words.length - 1][this.words[this.words.length - 1].length - 1];
+      if(this.languages.language == "ru"){
+        if(this.last_letter == "ы" || this.last_letter == "ь" || this.last_letter == "ъ"){
+          this.last_letter =this.words[this.words.length - 1][this.words[this.words.length - 1].length - 2];
+        }
+      }
       this.nextWord(this.languagesAlert.GAME.ALERT.NEXT, this.last_letter);
     }
   }
@@ -42,7 +47,6 @@ export class GamePage implements OnInit {
 
   async saveWord(wordsArray) {
     let inputs = [];
-    let letter = "";
     let word = [];
     for (let i = 0; i < wordsArray.length; i++) {
       let item = {
@@ -52,7 +56,6 @@ export class GamePage implements OnInit {
         value: wordsArray[i].toLowerCase(),
         handler: () => {
           word = wordsArray[i].toLowerCase();
-          letter = word[word.length - 1];
         },
         checked: false
       };
@@ -74,15 +77,25 @@ export class GamePage implements OnInit {
               if(this.words.length != 0){
                 if(word[0] == this.last_letter){
                   this.words.push(word);
-                  this.last_letter = word[word.length - 1];
                   localStorage.setItem(this.gameName, JSON.stringify(this.words));
-                  this.nextWord(this.languagesAlert.GAME.ALERT.NEXT, letter);
+                  this.last_letter = word[word.length - 1];
+                  if(this.languages.language == "ru"){
+                    if(this.last_letter == "ы" || this.last_letter == "ь" || this.last_letter == "ъ"){
+                      this.last_letter = word[word.length - 2];
+                    }
+                  }
+                  this.nextWord(this.languagesAlert.GAME.ALERT.NEXT, this.last_letter);
                 } else this.nextWord(this.languagesAlert.GAME.ALERT.ERROR_BUKVA, this.last_letter);
               } else {
                 this.words.push(word);
-                this.last_letter = word[word.length - 1];
                 localStorage.setItem(this.gameName, JSON.stringify(this.words));
-                this.nextWord(this.languagesAlert.GAME.ALERT.NEXT, letter);
+                this.last_letter = word[word.length - 1];
+                if(this.languages.language == "ru"){
+                  if(this.last_letter == "ы" || this.last_letter == "ь" || this.last_letter == "ъ"){
+                    this.last_letter = word[word.length - 2];
+                  }
+                }
+                this.nextWord(this.languagesAlert.GAME.ALERT.NEXT, this.last_letter);
               }
             } else this.nextWord(this.languagesAlert.GAME.ALERT.ERROR, this.words[this.words.length - 1][this.words[this.words.length - 1].length - 1]);
           }
@@ -95,7 +108,7 @@ export class GamePage implements OnInit {
   async nextWord(text, letter) {
     const alert = await this.alertController.create({
       header: text + letter,
-      buttons: [ //Добавить логику изменения последней буквы: например, если она Ы или Ь
+      buttons: [
         {
           text: 'Cancel',
           role: 'cancel',

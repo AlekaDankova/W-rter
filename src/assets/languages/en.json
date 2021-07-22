@@ -7,7 +7,8 @@
             "SPEECHPERMISSION_OK": "Permissions granted",
             "SPEECHPERMISSION_ERR": "No permissions",
             "NAME_ERR": "Enter the name of the game!",
-            "DELETE_GAME": "Are you sure you want to delete this game?"
+            "DELETE_GAME": "Are you sure you want to delete this game?",
+            "WORD_COUNT": "Number of words in the game: "
         }
     },
     "GAME": {
