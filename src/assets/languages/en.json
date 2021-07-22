@@ -14,13 +14,14 @@
     },
     "GAME": {
         "ALERT": {
-            "START": "Choose any word ...",
-            "NEXT": "The next word with a letter: ",
+            "START": "Choose any word...",
+            "NEXT": "The next word starts with a letter: ",
             "LIST": "The following words were recognized:",
-            "ERROR": "Such a word already exists. A new word with a letter: ",
-            "ERROR_BUKVA": "The word starts with the wrong letter. The next word with a letter: ",
+            "ERROR": "A word like that already sounded. The new word starts with a letter: ",
+            "ERROR_BUKVA": "Your word starts with the wrong letter. The word starts with a letter: ",
             "CANCEL": "Back",
-            "AGAIN": "Again"
+            "AGAIN": "Again",
+            "AGAIN_NEXT": "The word starts with a letter: "
         }
     }
 }

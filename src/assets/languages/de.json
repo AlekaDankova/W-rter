@@ -15,12 +15,13 @@
     "GAME": {
         "ALERT": {
             "START": "Wählen Sie ein beliebiges Wort...",
-            "NEXT": "Das nächste Wort mit dem Buchstaben: ",
+            "NEXT": "Das nächste Wort beginnt mit einem Buchstaben: ",
             "LIST": "Folgende Wörter wurden erkannt:",
-            "ERROR": "Ein solches Wort existiert bereits. Ein neues Wort mit dem Buchstaben: ",
-            "ERROR_BUKVA": "Das Wort beginnt mit dem falschen Buchstaben. Das nächste Wort mit dem Buchstaben: ",
+            "ERROR": "So ein Wort hat schon geklungen. Das neues Wort beginnt mit einem Buchstaben: ",
+            "ERROR_BUKVA": "Ihr Wort passt nicht. Das Wort beginnt mit einem Buchstaben: ",
             "CANCEL": "Zurück",
-            "AGAIN": "Noch einmal"
+            "AGAIN": "Noch einmal",
+            "AGAIN_NEXT": "Das Wort beginnt mit einem Buchstaben: "
         }
     }
 }

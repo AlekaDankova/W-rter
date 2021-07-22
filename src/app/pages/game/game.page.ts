@@ -81,7 +81,7 @@ export class GamePage implements OnInit {
         }, {
           text: this.languagesAlert.GAME.ALERT.AGAIN,
           handler: () => {
-            this.speechWord();
+            this.nextWord(this.languagesAlert.GAME.ALERT.AGAIN_NEXT, this.last_letter);
           }
         }, {
           text: 'Ok',
