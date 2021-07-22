@@ -26,8 +26,30 @@ export class HomePage {
         if (!hasPermission) {
           this.speechRecognition.requestPermission()
             .then(
-              () => alert(this.languagesAlert.HOME.ALERT.SPEECHPERMISSION_OK),
-              () => alert(this.languagesAlert.HOME.ALERT.SPEECHPERMISSION_ERR)
+              async () => {
+                const alert = await this.alertController.create({
+                  header: this.languagesAlert.HOME.ALERT.SPEECHPERMISSION_OK,
+                  buttons: [
+                    {
+                      text: 'Ok',
+                      role: 'cancel'
+                    }
+                  ]
+                });
+                await alert.present();
+              },
+              async () => {
+                const alert = await this.alertController.create({
+                  header: this.languagesAlert.HOME.ALERT.SPEECHPERMISSION_ERR,
+                  buttons: [
+                    {
+                      text: 'Cancel',
+                      role: 'cancel'
+                    }
+                  ]
+                });
+                await alert.present();
+              }
             )
         }
       });
@@ -45,9 +67,18 @@ export class HomePage {
     }
   }
 
-  startNewG() {
+  async startNewG() {
     if (this.name == undefined) {
-      alert(this.languagesAlert.HOME.ALERT.NAME_ERR);
+      const alert = await this.alertController.create({
+        header: this.languagesAlert.HOME.ALERT.NAME_ERR,
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel'
+          }
+        ]
+      });
+      await alert.present();
     } else {
       localStorage.setItem('gameName', this.name);
       localStorage.setItem(this.name, JSON.stringify([]));
@@ -67,8 +98,7 @@ export class HomePage {
       buttons: [
         {
           text: 'Cancel',
-          role: 'cancel',
-          handler: () => { }
+          role: 'cancel'
         }, {
           text: 'Ok',
           handler: () => {
@@ -81,9 +111,18 @@ export class HomePage {
     await alert.present();
   }
 
-  getCountWord(gameName) {
+  async getCountWord(gameName) {
     let words = JSON.parse(window.localStorage.getItem(gameName));
-    alert(this.languagesAlert.HOME.ALERT.WORD_COUNT + words.length);
+    const alert = await this.alertController.create({
+      header: this.languagesAlert.HOME.ALERT.WORD_COUNT + words.length,
+      buttons: [
+        {
+          text: 'Ok',
+          role: 'cancel'
+        }
+      ]
+    });
+    await alert.present();
   }
 
 }

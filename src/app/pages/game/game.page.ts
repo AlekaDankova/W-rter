@@ -40,8 +40,17 @@ export class GamePage implements OnInit {
     this.speechRecognition.startListening().subscribe((speeches) => {
       let array = speeches.toString().split(",");
       this.saveWord(array);
-    }, (err) => {
-      alert(JSON.stringify(err));
+    }, async (err) => {
+      const alert = await this.alertController.create({
+        header: JSON.stringify(err),
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel'
+          }
+        ]
+      });
+      await alert.present();
     });
   }
 
@@ -111,8 +120,7 @@ export class GamePage implements OnInit {
       buttons: [
         {
           text: 'Cancel',
-          role: 'cancel',
-          handler: () => { }
+          role: 'cancel'
         }, {
           text: 'Ok',
           handler: () => {
