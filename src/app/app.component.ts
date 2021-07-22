@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SprachenService } from './services/sprachen.service';
+import { LanguagesService } from './services/languages.service';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +8,8 @@ import { SprachenService } from './services/sprachen.service';
 })
 export class AppComponent {
   constructor(
-    private sprachen: SprachenService
+    private languages: LanguagesService
   ) {
-    this.sprachen.getSprache();
+    this.languages.getLanguages();
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SpeechRecognition } from '@ionic-native/speech-recognition/ngx';
 import { AlertController } from '@ionic/angular';
-import { SprachenService } from 'src/app/services/sprachen.service';
+import { LanguagesService } from 'src/app/services/languages.service';
 
 @Component({
   selector: 'app-game',
@@ -11,51 +11,55 @@ import { SprachenService } from 'src/app/services/sprachen.service';
 export class GamePage implements OnInit {
 
   public gameName = window.localStorage.getItem('gameName');
-  public woerter = JSON.parse(window.localStorage.getItem(this.gameName));
-  private sprachenAlert = JSON.parse(JSON.stringify(this.sprachen.spracheArray));
+  public words = JSON.parse(window.localStorage.getItem(this.gameName));
+  private languagesAlert = JSON.parse(JSON.stringify(this.languages.languagesArray));
+  private last_letter = "";
 
   constructor(
     public speechRecognition: SpeechRecognition,
     public alertController: AlertController,
-    public sprachen: SprachenService
+    public languages: LanguagesService
   ) { }
 
   ngOnInit() { }
 
   addWord(){
-    if(this.woerter.length == 0) this.nextWord(this.sprachenAlert.GAME.ALERT.START, "");
-    else this.nextWord(this.sprachenAlert.GAME.ALERT.NEXT, this.woerter[this.woerter.length - 1][this.woerter[this.woerter.length - 1].length - 1]);
+    if(this.words.length == 0) this.nextWord(this.languagesAlert.GAME.ALERT.START, "");
+    else {
+      this.last_letter = this.words[this.words.length - 1][this.words[this.words.length - 1].length - 1];
+      this.nextWord(this.languagesAlert.GAME.ALERT.NEXT, this.last_letter);
+    }
   }
 
   speechWord() {
     this.speechRecognition.startListening().subscribe((speeches) => {
-      let a = speeches.toString().split(",");
-      this.saveWord(a);
+      let array = speeches.toString().split(",");
+      this.saveWord(array);
     }, (err) => {
       alert(JSON.stringify(err));
     });
   }
 
-  async saveWord(words) {
+  async saveWord(wordsArray) {
     let inputs = [];
-    let bukva = "";
+    let letter = "";
     let word = [];
-    for (let i = 0; i < words.length; i++) {
+    for (let i = 0; i < wordsArray.length; i++) {
       let item = {
-        name: words[i],
+        name: wordsArray[i].toLowerCase(),
         type: 'radio',
-        label: words[i],
-        value: words[i],
+        label: wordsArray[i].toLowerCase(),
+        value: wordsArray[i].toLowerCase(),
         handler: () => {
-          word = words[i];
-          bukva = words[i].toString()[words[i].toString().length - 1];
+          word = wordsArray[i].toLowerCase();
+          letter = word[word.length - 1];
         },
         checked: false
       };
       inputs.push(item);
     }
     const alert = await this.alertController.create({
-      header: this.sprachenAlert.GAME.ALERT.LIST,
+      header: this.languagesAlert.GAME.ALERT.LIST,
       inputs: inputs,
       buttons: [
         {
@@ -65,12 +69,22 @@ export class GamePage implements OnInit {
         }, {
           text: 'Ok',
           handler: () => {
-            let t = this.woerter.includes(word);
+            let t = this.words.includes(word);
             if (!t) {
-              this.woerter.push(word);
-              localStorage.setItem(this.gameName, JSON.stringify(this.woerter));
-              this.nextWord(this.sprachenAlert.GAME.ALERT.NEXT, bukva);
-            } else this.nextWord(this.sprachenAlert.GAME.ALERT.ERROR, this.woerter[this.woerter.length - 1][this.woerter[this.woerter.length - 1].length - 1]);
+              if(this.words.length != 0){
+                if(word[0] == this.last_letter){
+                  this.words.push(word);
+                  this.last_letter = word[word.length - 1];
+                  localStorage.setItem(this.gameName, JSON.stringify(this.words));
+                  this.nextWord(this.languagesAlert.GAME.ALERT.NEXT, letter);
+                } else this.nextWord(this.languagesAlert.GAME.ALERT.ERROR_BUKVA, this.last_letter);
+              } else {
+                this.words.push(word);
+                this.last_letter = word[word.length - 1];
+                localStorage.setItem(this.gameName, JSON.stringify(this.words));
+                this.nextWord(this.languagesAlert.GAME.ALERT.NEXT, letter);
+              }
+            } else this.nextWord(this.languagesAlert.GAME.ALERT.ERROR, this.words[this.words.length - 1][this.words[this.words.length - 1].length - 1]);
           }
         }
       ]
@@ -78,10 +92,10 @@ export class GamePage implements OnInit {
     await alert.present();
   }
 
-  async nextWord(text, bukva) {
+  async nextWord(text, letter) {
     const alert = await this.alertController.create({
-      header: text + bukva,
-      buttons: [
+      header: text + letter,
+      buttons: [ //Добавить логику изменения последней буквы: например, если она Ы или Ь
         {
           text: 'Cancel',
           role: 'cancel',

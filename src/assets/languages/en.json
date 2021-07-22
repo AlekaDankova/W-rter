@@ -1,0 +1,22 @@
+{
+    "GAME_NAME": "W••rds",
+    "HOME": {
+        "INPUT": "The name of the new game ...",
+        "LIST": "Saved Games:",
+        "ALERT": {
+            "SPEECHPERMISSION_OK": "Permissions granted",
+            "SPEECHPERMISSION_ERR": "No permissions",
+            "NAME_ERR": "Enter the name of the game!",
+            "DELETE_GAME": "Are you sure you want to delete this game?"
+        }
+    },
+    "GAME": {
+        "ALERT": {
+            "START": "Choose any word ...",
+            "NEXT": "The next word with a letter: ",
+            "LIST": "The following words were recognized:",
+            "ERROR": "Such a word already exists. A new word with a letter: ",
+            "ERROR_BUKVA": "The word starts with the wrong letter. The next word with a letter: "
+        }
+    }
+}
