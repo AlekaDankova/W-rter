@@ -22,6 +22,7 @@
             "CANCEL": "Back",
             "AGAIN": "Again",
             "AGAIN_NEXT": "The word starts with a letter: "
-        }
+        },
+        "EXCEPTIONS": []
     }
 }

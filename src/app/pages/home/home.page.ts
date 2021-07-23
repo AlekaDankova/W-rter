@@ -51,6 +51,12 @@ export class HomePage {
                 await alert.present();
               }
             )
+        } else {
+          this.speechRecognition.getSupportedLanguages()
+            .then(
+              (languages: Array<string>) => alert(JSON.stringify(languages)),
+              (error) => console.log(error)
+            );
         }
       });
   }

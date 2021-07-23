@@ -14,6 +14,7 @@ export class GamePage implements OnInit {
   public words = JSON.parse(window.localStorage.getItem(this.gameName));
   private languagesAlert = JSON.parse(JSON.stringify(this.languages.languagesArray));
   private last_letter = "";
+  private exceptions = this.languagesAlert.GAME.EXCEPTIONS;
 
   constructor(
     public speechRecognition: SpeechRecognition,
@@ -27,10 +28,9 @@ export class GamePage implements OnInit {
     if(this.words.length == 0) this.nextWord(this.languagesAlert.GAME.ALERT.START, "");
     else {
       this.last_letter = this.words[this.words.length - 1][this.words[this.words.length - 1].length - 1];
-      if(this.languages.language == "ru"){
-        if(this.last_letter == "ы" || this.last_letter == "ь" || this.last_letter == "ъ"){
-          this.last_letter =this.words[this.words.length - 1][this.words[this.words.length - 1].length - 2];
-        }
+      for(let i = 0; i < this.exceptions.length; i++){
+        if(this.last_letter == this.exceptions[i])
+        this.last_letter =this.words[this.words.length - 1][this.words[this.words.length - 1].length - 2];
       }
       this.nextWord(this.languagesAlert.GAME.ALERT.NEXT, this.last_letter);
     }
@@ -93,10 +93,9 @@ export class GamePage implements OnInit {
                   this.words.push(word);
                   localStorage.setItem(this.gameName, JSON.stringify(this.words));
                   this.last_letter = word[word.length - 1];
-                  if(this.languages.language == "ru"){
-                    if(this.last_letter == "ы" || this.last_letter == "ь" || this.last_letter == "ъ"){
-                      this.last_letter = word[word.length - 2];
-                    }
+                  for(let i = 0; i < this.exceptions.length; i++){
+                    if(this.last_letter == this.exceptions[i])
+                    this.last_letter = word[word.length - 2];
                   }
                   this.nextWord(this.languagesAlert.GAME.ALERT.NEXT, this.last_letter);
                 } else this.nextWord(this.languagesAlert.GAME.ALERT.ERROR_BUKVA, this.last_letter);
@@ -104,10 +103,9 @@ export class GamePage implements OnInit {
                 this.words.push(word);
                 localStorage.setItem(this.gameName, JSON.stringify(this.words));
                 this.last_letter = word[word.length - 1];
-                if(this.languages.language == "ru"){
-                  if(this.last_letter == "ы" || this.last_letter == "ь" || this.last_letter == "ъ"){
-                    this.last_letter = word[word.length - 2];
-                  }
+                for(let i = 0; i < this.exceptions.length; i++){
+                  if(this.last_letter == this.exceptions[i])
+                  this.last_letter = word[word.length - 2];
                 }
                 this.nextWord(this.languagesAlert.GAME.ALERT.NEXT, this.last_letter);
               }
