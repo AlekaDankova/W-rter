@@ -9,7 +9,7 @@ export class LanguagesService {
   public language = window.localStorage.getItem('language');
 
   constructor() { 
-    if(this.language == null) this.language = "ru";
+    if(this.language == null) this.language = "de";
   }
 
   public getLanguages(){
